@@ -1,0 +1,526 @@
+/* ==========================================
+   共通スタイル
+   ========================================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Yu Gothic', 'YuGothic', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 2rem;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* ==========================================
+   ヘッダーセクション
+   ========================================== */
+.header-section {
+    background: white;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.header-section h1 {
+    color: #333;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.description {
+    color: #666;
+    font-size: 1rem;
+}
+
+/* ==========================================
+   アップロードセクション
+   ========================================== */
+.upload-section {
+    background: white;
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.upload-area {
+    border: 3px dashed #cbd5e0;
+    border-radius: 12px;
+    padding: 3rem 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: #f7fafc;
+}
+
+.upload-area:hover {
+    border-color: #667eea;
+    background: #edf2f7;
+}
+
+.upload-area.dragover {
+    border-color: #667eea;
+    background: #e6f2ff;
+    transform: scale(1.02);
+}
+
+.upload-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.upload-area p {
+    color: #4a5568;
+    font-size: 1.1rem;
+    margin: 0.5rem 0;
+}
+
+.upload-or {
+    color: #a0aec0;
+    font-size: 0.9rem;
+    margin: 1rem 0;
+}
+
+.select-file-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 0.8rem 2rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.select-file-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.file-status {
+    margin-top: 1.5rem;
+}
+
+.file-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: #f7fafc;
+    border-radius: 8px;
+    border: 2px solid #e2e8f0;
+}
+
+.file-item.valid {
+    border-color: #48bb78;
+    background: #f0fff4;
+}
+
+.status-ok {
+    color: #48bb78;
+    font-weight: 600;
+}
+
+/* ==========================================
+   アクションボタン
+   ========================================== */
+.actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 0.8rem 2rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(72, 187, 120, 0.3);
+}
+
+.btn-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(72, 187, 120, 0.4);
+}
+
+.btn-secondary {
+    background: #e2e8f0;
+    color: #4a5568;
+}
+
+.btn-secondary:hover {
+    background: #cbd5e0;
+}
+
+/* ==========================================
+   メッセージエリア
+   ========================================== */
+.message-area {
+    margin-bottom: 2rem;
+}
+
+.message {
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.message.success {
+    background: #f0fff4;
+    color: #276749;
+    border-left: 4px solid #48bb78;
+}
+
+.message.error {
+    background: #fff5f5;
+    color: #742a2a;
+    border-left: 4px solid #f56565;
+}
+
+.message.info {
+    background: #ebf8ff;
+    color: #2c5282;
+    border-left: 4px solid #4299e1;
+}
+
+/* ==========================================
+   カードコンテナ（画面表示用）
+   ========================================== */
+.cards-container {
+    margin-top: 2rem;
+}
+
+.page {
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    gap: 0.8rem;
+}
+
+/* ==========================================
+   カードスタイル（A4横・16分割・プレミアムデザイン）
+   ========================================== */
+.card {
+    position: relative;
+    aspect-ratio: 1.6;
+    border-radius: 8px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+}
+
+.card.empty {
+    background: transparent;
+    box-shadow: none;
+}
+
+.card-inner {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0.9rem;
+    position: relative;
+}
+
+/* カードヘッダー */
+.card-header {
+    position: relative;
+    margin-bottom: 0.6rem;
+    padding-bottom: 0.5rem;
+}
+
+.card-header::before {
+    content: '';
+    position: absolute;
+    top: -0.3rem;
+    left: 0;
+    width: 35%;
+    height: 2px;
+    background: linear-gradient(90deg, #ffd700, #ffed4e, transparent);
+    box-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
+}
+
+.card-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2) 20%,
+        rgba(255, 255, 255, 0.2) 80%,
+        transparent
+    );
+}
+
+.card-title {
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    line-height: 1.3;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    word-break: break-all;
+}
+
+/* カードボディ */
+.card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.keep-label {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.3rem;
+}
+
+.keep-value {
+    color: #ffd700;
+    font-size: 2rem;
+    font-weight: 900;
+    line-height: 1;
+    text-shadow:
+        0 0 15px rgba(255, 215, 0, 0.5),
+        0 3px 6px rgba(0, 0, 0, 0.4);
+    letter-spacing: 0.02em;
+}
+
+.unit {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-left: 0.2rem;
+    color: rgba(255, 215, 0, 0.9);
+}
+
+/* カードフッター */
+.card-footer {
+    position: relative;
+    padding-top: 0.5rem;
+}
+
+.decoration-line {
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 215, 0, 0.25) 30%,
+        rgba(255, 215, 0, 0.25) 70%,
+        transparent
+    );
+}
+
+/* プレミアム装飾 */
+.card::before {
+    content: '';
+    position: absolute;
+    top: -20%;
+    right: -10%;
+    width: 100px;
+    height: 100px;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.08) 0%, transparent 70%);
+    border-radius: 50%;
+}
+
+.card::after {
+    content: '';
+    position: absolute;
+    bottom: -15%;
+    left: -8%;
+    width: 80px;
+    height: 80px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.03) 0%, transparent 70%);
+    border-radius: 50%;
+}
+
+/* 右上の装飾アクセント */
+.card-inner::before {
+    content: '';
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    width: 20px;
+    height: 20px;
+    border-top: 2px solid rgba(255, 215, 0, 0.3);
+    border-right: 2px solid rgba(255, 215, 0, 0.3);
+    border-radius: 0 4px 0 0;
+}
+
+/* 左下の装飾アクセント */
+.card-inner::after {
+    content: '';
+    position: absolute;
+    bottom: 0.5rem;
+    left: 0.5rem;
+    width: 16px;
+    height: 16px;
+    border-bottom: 2px solid rgba(255, 215, 0, 0.2);
+    border-left: 2px solid rgba(255, 215, 0, 0.2);
+    border-radius: 0 0 0 4px;
+}
+
+/* ==========================================
+   印刷用スタイル（A4横向き・4×4グリッド）
+   ========================================== */
+@media print {
+    * {
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        color-adjust: exact !important;
+    }
+
+    body {
+        background: white;
+        padding: 0;
+        margin: 0;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+
+    .container {
+        max-width: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .cards-container {
+        margin: 0;
+    }
+
+    .page {
+        width: 297mm;  /* A4横 */
+        height: 210mm; /* A4横 */
+        padding: 6mm;
+        margin: 0;
+        page-break-after: always;
+        box-shadow: none;
+        border-radius: 0;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+        gap: 6mm;
+        background: white;
+    }
+
+    .page:last-child {
+        page-break-after: auto;
+    }
+
+    .card {
+        width: 100%;
+        height: 100%;
+        aspect-ratio: auto;
+        border-radius: 6px;
+        page-break-inside: avoid;
+        box-shadow:
+            0 4px 12px rgba(0, 0, 0, 0.2),
+            inset 0 1px 0 rgba(255, 255, 255, 0.1),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+    }
+
+    .card.empty {
+        display: none;
+    }
+
+    .card-inner {
+        padding: 0.7rem;
+    }
+
+    .card-header {
+        margin-bottom: 0.5rem;
+        padding-bottom: 0.4rem;
+    }
+
+    .card-header::before {
+        height: 2px;
+    }
+
+    .card-title {
+        font-size: 0.8rem;
+    }
+
+    .keep-label {
+        font-size: 0.55rem;
+    }
+
+    .keep-value {
+        font-size: 1.7rem;
+    }
+
+    .unit {
+        font-size: 0.95rem;
+    }
+
+    .card-inner::before {
+        width: 16px;
+        height: 16px;
+    }
+
+    .card-inner::after {
+        width: 14px;
+        height: 14px;
+    }
+}
+
+/* A4横向き設定 */
+@page {
+    size: A4 landscape;
+    margin: 0;
+}

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>キープ数カード印刷</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header-section no-print">
+            <h1>キープ数カード印刷（カラー版）</h1>
+            <p class="description">A4横・16分割（4列×4行）プレミアムグラデーションデザイン</p>
+        </div>
+
+        <div class="upload-section no-print">
+            <div class="upload-area" id="dropZone">
+                <div class="upload-icon">📄</div>
+                <p>JuyoYosokuSetting.csvをドラッグ＆ドロップ</p>
+                <p class="upload-or">または</p>
+                <input type="file" id="fileInput" accept=".csv" style="display: none;">
+                <button class="select-file-btn" onclick="document.getElementById('fileInput').click()">ファイルを選択</button>
+            </div>
+            <div id="fileStatus" class="file-status"></div>
+        </div>
+
+        <div class="actions no-print" id="actionButtons" style="display: none;">
+            <button id="generateBtn" class="btn btn-primary">カードを生成</button>
+            <button id="printBtn" class="btn btn-success" style="display: none;">印刷プレビュー</button>
+        </div>
+
+        <div id="messageArea" class="message-area no-print"></div>
+
+        <div id="cardsContainer" class="cards-container"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
