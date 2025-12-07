@@ -2,15 +2,21 @@
 const dropZone = document.getElementById('dropZone');
 const fileInput = document.getElementById('fileInput');
 const fileStatus = document.getElementById('fileStatus');
-const generateBtn = document.getElementById('generateBtn');
+const generateColorBtn = document.getElementById('generateColorBtn');
+const generateBwBtn = document.getElementById('generateBwBtn');
 const printBtn = document.getElementById('printBtn');
 const actionButtons = document.getElementById('actionButtons');
 const messageArea = document.getElementById('messageArea');
 const cardsContainer = document.getElementById('cardsContainer');
+const pageTitle = document.getElementById('pageTitle');
+const pageDescription = document.getElementById('pageDescription');
+const mainStyle = document.getElementById('mainStyle');
+const bwStyle = document.getElementById('bwStyle');
 
 // 選択されたファイル
 let selectedFile = null;
 let csvData = [];
+let currentMode = 'color'; // 'color' or 'bw'
 
 // ドラッグ＆ドロップイベントの設定
 dropZone.addEventListener('dragover', (e) => {
@@ -39,8 +45,17 @@ fileInput.addEventListener('change', (e) => {
     }
 });
 
-// 生成ボタンのイベント
-generateBtn.addEventListener('click', () => {
+// 生成ボタンのイベント（カラー）
+generateColorBtn.addEventListener('click', () => {
+    currentMode = 'color';
+    switchStyle('color');
+    generateCards();
+});
+
+// 生成ボタンのイベント（白黒）
+generateBwBtn.addEventListener('click', () => {
+    currentMode = 'bw';
+    switchStyle('bw');
     generateCards();
 });
 
@@ -48,6 +63,23 @@ generateBtn.addEventListener('click', () => {
 printBtn.addEventListener('click', () => {
     window.print();
 });
+
+/**
+ * スタイルを切り替え
+ */
+function switchStyle(mode) {
+    if (mode === 'color') {
+        mainStyle.disabled = false;
+        bwStyle.disabled = true;
+        pageTitle.textContent = 'キープ数カード印刷（カラー版）';
+        pageDescription.textContent = 'A4横・16分割（4列×4行）プレミアムグラデーションデザイン';
+    } else {
+        mainStyle.disabled = true;
+        bwStyle.disabled = false;
+        pageTitle.textContent = 'キープ数カード印刷（白黒版）';
+        pageDescription.textContent = 'A4横・16分割（4列×4行）インク節約デザイン';
+    }
+}
 
 /**
  * ファイル処理
@@ -212,7 +244,8 @@ async function generateCards() {
         printBtn.style.display = 'inline-block';
 
         clearMessage();
-        showSuccess(`${csvData.length}枚のカードを生成しました（${Math.ceil(csvData.length / 16)}ページ）`);
+        const modeText = currentMode === 'color' ? 'カラー' : '白黒';
+        showSuccess(`${csvData.length}枚のカードを生成しました（${modeText}版・${Math.ceil(csvData.length / 16)}ページ）`);
 
         // カードコンテナまでスクロール
         setTimeout(() => {
@@ -268,35 +301,65 @@ function createCard(data) {
     const card = document.createElement('div');
     card.className = 'card';
 
-    // 薬価表示用（空の場合は非表示）
-    const priceHtml = data.drugPrice ? `<div class="drug-price">薬価: ${data.drugPrice}円</div>` : '';
+    if (currentMode === 'color') {
+        // カラー版
+        const priceHtml = data.drugPrice ? `<div class="drug-price">薬価: ${data.drugPrice}円</div>` : '';
 
-    // 処方回数・患者数表示用（空の場合は非表示）
-    const statsHtml = [];
-    if (data.prescriptionCount) {
-        statsHtml.push(`処方回数: ${data.prescriptionCount}回`);
-    }
-    if (data.patientCount) {
-        statsHtml.push(`患者数: ${data.patientCount}人`);
-    }
-    const statsDisplay = statsHtml.length > 0 ? `<div class="drug-stats">${statsHtml.join(' / ')}</div>` : '';
+        const statsHtml = [];
+        if (data.prescriptionCount) {
+            statsHtml.push(`処方回数: ${data.prescriptionCount}回`);
+        }
+        if (data.patientCount) {
+            statsHtml.push(`患者数: ${data.patientCount}人`);
+        }
+        const statsDisplay = statsHtml.length > 0 ? `<div class="drug-stats">${statsHtml.join(' / ')}</div>` : '';
 
-    card.innerHTML = `
-        <div class="card-inner">
-            <div class="card-header">
-                <div class="card-title">${escapeHtml(data.drugName)}</div>
-                ${priceHtml}
+        card.innerHTML = `
+            <div class="card-inner">
+                <div class="card-header">
+                    <div class="card-title">${escapeHtml(data.drugName)}</div>
+                    ${priceHtml}
+                </div>
+                <div class="card-body">
+                    <div class="keep-label">キープ数</div>
+                    <div class="keep-value">${data.keepNumber.toLocaleString()}</div>
+                </div>
+                <div class="card-footer">
+                    ${statsDisplay}
+                    <div class="decoration-line"></div>
+                </div>
             </div>
-            <div class="card-body">
-                <div class="keep-label">キープ数</div>
-                <div class="keep-value">${data.keepNumber.toLocaleString()}</div>
+        `;
+    } else {
+        // 白黒版
+        const infoItems = [];
+        if (data.drugPrice) {
+            infoItems.push(`薬価: ${data.drugPrice}円`);
+        }
+        if (data.prescriptionCount) {
+            infoItems.push(`処方: ${data.prescriptionCount}回`);
+        }
+        if (data.patientCount) {
+            infoItems.push(`患者: ${data.patientCount}人`);
+        }
+        const infoHtml = infoItems.length > 0 ? `<div class="drug-info">${infoItems.join(' / ')}</div>` : '';
+
+        card.innerHTML = `
+            <div class="card-inner">
+                <div class="card-header">
+                    <div class="card-title">${escapeHtml(data.drugName)}</div>
+                    ${infoHtml}
+                </div>
+                <div class="card-body">
+                    <div class="keep-label">キープ数</div>
+                    <div class="keep-value">${data.keepNumber.toLocaleString()}</div>
+                </div>
+                <div class="card-footer">
+                    <div class="decoration-line"></div>
+                </div>
             </div>
-            <div class="card-footer">
-                ${statsDisplay}
-                <div class="decoration-line"></div>
-            </div>
-        </div>
-    `;
+        `;
+    }
 
     return card;
 }

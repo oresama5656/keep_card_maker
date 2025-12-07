@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>キープ数カード印刷</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" id="mainStyle">
+    <link rel="stylesheet" href="style-bw.css" id="bwStyle" disabled>
 </head>
 <body>
     <div class="container">
         <div class="header-section no-print">
-            <h1>キープ数カード印刷（カラー版）</h1>
-            <p class="description">A4横・16分割（4列×4行）プレミアムグラデーションデザイン</p>
+            <h1 id="pageTitle">キープ数カード印刷</h1>
+            <p class="description" id="pageDescription">A4横・16分割（4列×4行）</p>
         </div>
 
         <div class="instructions-section no-print">
@@ -81,7 +82,8 @@
         </div>
 
         <div class="actions no-print" id="actionButtons" style="display: none;">
-            <button id="generateBtn" class="btn btn-primary">カードを生成</button>
+            <button id="generateColorBtn" class="btn btn-primary">カードを生成（カラー）</button>
+            <button id="generateBwBtn" class="btn btn-primary">カードを生成（白黒）</button>
             <button id="printBtn" class="btn btn-success" style="display: none;">印刷プレビュー</button>
         </div>
 
@@ -90,6 +92,6 @@
         <div id="cardsContainer" class="cards-container"></div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
