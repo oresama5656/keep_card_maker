@@ -13,6 +13,62 @@
             <p class="description">A4横・16分割（4列×4行）プレミアムグラデーションデザイン</p>
         </div>
 
+        <div class="instructions-section no-print">
+            <h2>📋 使い方</h2>
+            <div class="step-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>CSVファイルをダウンロード</h3>
+                        <p class="step-description">ミザルシステムから需要予測設定データをダウンロードします</p>
+                        <div class="navigation-path">
+                            <span class="nav-item">ミザル</span>
+                            <span class="nav-arrow">→</span>
+                            <span class="nav-item">発注</span>
+                            <span class="nav-arrow">→</span>
+                            <span class="nav-item">需要予測発注設定</span>
+                            <span class="nav-arrow">→</span>
+                            <span class="nav-item">検索</span>
+                            <span class="nav-arrow">→</span>
+                            <span class="nav-item">CSV</span>
+                            <span class="nav-arrow">→</span>
+                            <span class="nav-item highlight">出力</span>
+                        </div>
+                        <div class="tip">
+                            <strong>💡 ヒント:</strong> 検索時に「発注点固定」を「除外品」に設定すると、手発注が必要なカードのみ出力できます
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>CSVファイルをアップロード</h3>
+                        <p class="step-description">ダウンロードした <strong>JuyoYosokuSetting.csv</strong> を下のエリアにドラッグ＆ドロップするか、「ファイルを選択」ボタンで選択します</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>カードを生成</h3>
+                        <p class="step-description">「カードを生成」ボタンをクリックすると、キープ数カードが自動生成されます</p>
+                        <div class="note">
+                            キープ数は、安全在庫数量とMAX出庫数量の大きい方が自動的に選択されます
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>印刷</h3>
+                        <p class="step-description">「印刷プレビュー」ボタンをクリックして、A4横向きで印刷します</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="upload-section no-print">
             <div class="upload-area" id="dropZone">
                 <div class="upload-icon">📄</div>

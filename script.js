@@ -171,12 +171,15 @@ async function generateCards() {
 
         // 列インデックスを取得
         const drugNameIdx = 4;  // E列：薬品名
+        const drugPriceIdx = 6;  // G列：薬価
         const safetyStockIdx = 12;  // M列：安全在庫数量
         const maxOutIdx = 13;  // N列：MAX出庫数量
+        const prescriptionCountIdx = 14;  // O列：処方回数
+        const patientCountIdx = 15;  // P列：患者数
 
         // カードデータを作成
         csvData = dataRows
-            .filter(row => row.length > Math.max(drugNameIdx, safetyStockIdx, maxOutIdx))
+            .filter(row => row.length > Math.max(drugNameIdx, drugPriceIdx, safetyStockIdx, maxOutIdx, prescriptionCountIdx, patientCountIdx))
             .map(row => {
                 // M列とN列の値を取得して、大きい方をキープ数とする
                 const safetyStock = parseInt(row[safetyStockIdx]) || 0;
@@ -185,9 +188,12 @@ async function generateCards() {
 
                 return {
                     drugName: row[drugNameIdx],
+                    drugPrice: row[drugPriceIdx] || '',
                     keepNumber: keepNumber,
                     safetyStock: safetyStock,
-                    maxOut: maxOut
+                    maxOut: maxOut,
+                    prescriptionCount: row[prescriptionCountIdx] || '',
+                    patientCount: row[patientCountIdx] || ''
                 };
             })
             .filter(item => item.drugName && item.drugName.trim() !== '' && item.keepNumber > 0);
@@ -262,16 +268,31 @@ function createCard(data) {
     const card = document.createElement('div');
     card.className = 'card';
 
+    // 薬価表示用（空の場合は非表示）
+    const priceHtml = data.drugPrice ? `<div class="drug-price">薬価: ${data.drugPrice}円</div>` : '';
+
+    // 処方回数・患者数表示用（空の場合は非表示）
+    const statsHtml = [];
+    if (data.prescriptionCount) {
+        statsHtml.push(`処方回数: ${data.prescriptionCount}回`);
+    }
+    if (data.patientCount) {
+        statsHtml.push(`患者数: ${data.patientCount}人`);
+    }
+    const statsDisplay = statsHtml.length > 0 ? `<div class="drug-stats">${statsHtml.join(' / ')}</div>` : '';
+
     card.innerHTML = `
         <div class="card-inner">
             <div class="card-header">
                 <div class="card-title">${escapeHtml(data.drugName)}</div>
+                ${priceHtml}
             </div>
             <div class="card-body">
                 <div class="keep-label">キープ数</div>
-                <div class="keep-value">${data.keepNumber.toLocaleString()}<span class="unit">錠</span></div>
+                <div class="keep-value">${data.keepNumber.toLocaleString()}</div>
             </div>
             <div class="card-footer">
+                ${statsDisplay}
                 <div class="decoration-line"></div>
             </div>
         </div>
